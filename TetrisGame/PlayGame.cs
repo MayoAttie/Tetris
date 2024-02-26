@@ -79,7 +79,10 @@ namespace TetrisGame
                         // 아래쪽으로 이동
                         MoveBlockDown();
                         break;
-                        // 다른 입력에 대한 처리 추가 가능
+                    case ConsoleKey.UpArrow:
+                        // 회전
+                        RotateBlocks();
+                        break;
                 }
             }
         }
@@ -99,7 +102,7 @@ namespace TetrisGame
                 // 블록 생성
                 int x = Header.Max_X / 2;
                 Header.e_BlockType type = RandBlockReturn();
-                newBlock = new Header.Block(Header.e_BlockType.square, x, 2, this);
+                newBlock = new Header.Block(type, x, 2, this);
                 isDroping = true;
             }
             else
@@ -308,6 +311,35 @@ namespace TetrisGame
                 }
             }
         }
+
+        void RotateBlocks()
+        {
+            switch (newBlock.Type)
+            {
+                case Header.e_BlockType.straight:
+                    newBlock.StraightRotate();
+                    break;
+                case Header.e_BlockType.square:
+                    newBlock.squareRotate();
+                    break;
+                case Header.e_BlockType.skew_1:
+                    newBlock.skewRotate();
+                    break;
+                case Header.e_BlockType.skew_2:
+                    newBlock.skewRotate();
+                    break;
+                case Header.e_BlockType.L_1:
+                    newBlock.L_Rotate();
+                    break;
+                case Header.e_BlockType.L_2:
+                    newBlock.L_Rotate();
+                    break;
+                case Header.e_BlockType.T:
+                    newBlock.T_Rotate();
+                    break;
+            }
+        }
+
         #endregion
 
         #region 게터세터
