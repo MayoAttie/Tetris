@@ -102,7 +102,7 @@ namespace TetrisGame
                 // 블록 생성
                 int x = Header.Max_X / 2;
                 Header.e_BlockType type = RandBlockReturn();
-                newBlock = new Header.Block(type, x, 2, this);
+                newBlock = new Header.Block(Header.e_BlockType.T, x, 2, this);
                 isDroping = true;
             }
             else
@@ -323,16 +323,16 @@ namespace TetrisGame
                     newBlock.squareRotate();
                     break;
                 case Header.e_BlockType.skew_1:
-                    newBlock.skewRotate();
+                    newBlock.skew_1_Rotate();
                     break;
                 case Header.e_BlockType.skew_2:
-                    newBlock.skewRotate();
+                    newBlock.skew_2_Rotate();
                     break;
                 case Header.e_BlockType.L_1:
-                    newBlock.L_Rotate();
+                    newBlock.L_1_Rotate();
                     break;
                 case Header.e_BlockType.L_2:
-                    newBlock.L_Rotate();
+                    newBlock.L_2_Rotate();
                     break;
                 case Header.e_BlockType.T:
                     newBlock.T_Rotate();

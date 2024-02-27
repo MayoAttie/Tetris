@@ -366,30 +366,316 @@ namespace TetrisGame
             }
             public void squareRotate()
             {
-                for (int i = 0; i < childBlocks.Count; i++)
-                {
+                rotate += 90;
 
+                if (rotate >= 360)
+                    rotate = 0;
+
+                switch (rotate)
+                {
+                    case 0:
+                    case 180:
+                        {
+                            
+                        }
+                        break;
+                    case 90:
+                    case 270:
+                        {
+                        }
+                        break;
                 }
             }
-            public void skewRotate()
+            public void skew_1_Rotate()
             {
-                for (int i = 0; i < childBlocks.Count; i++)
+                rotate += 90;
+
+                if (rotate >= 360)
+                    rotate = 0;
+
+                int flagY = childBlocks[0].Item1;
+                int flagX = childBlocks[0].Item2;
+                bool isPossible = true;
+                int[] dy = {0,0,0,0};
+                int[] dx = {0,0,0,0};
+                switch (rotate)
                 {
+                    case 0:
+                    case 180:
+                        {
+                            dy = new int[] { 0, 0, 1, 1 };
+                            dx = new int[] { -1, 0, 0, 1 };
+                            break;
+                        }
+                    case 90:
+                    case 270:
+                        {
+                            dy = new int[] { 0, 1, 1, 2 };
+                            dx = new int[] { 1, 0, 1, 0 };
+                            break;
+                        }
 
                 }
-            }
-            public void L_Rotate()
-            {
                 for (int i = 0; i < childBlocks.Count; i++)
                 {
+                    int nowY = flagY + dy[i];
+                    int nowX = flagX + dx[i];
+                    if (games.InitGames._GameBoard[nowY, nowX] == e_BoardState.blocks && !IsChildBlock(nowY, nowX))
+                    {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible)
+                {
+                    for (int i = 0; i < childBlocks.Count; i++)
+                    {
+                        int nowY = childBlocks[i].Item1;
+                        int nowX = childBlocks[i].Item2;
+                        int newY = flagY + dy[i];
+                        int newX = flagX + dx[i];
+                        childBlocks[i] = Tuple.Create(newY, newX);
+                        games.InitGames._GameBoard[nowY, nowX] = e_BoardState.blank;
+                        games.InitGames._GameBoard[newY, newX] = e_BoardState.blocks;
+                    }
+                }
+            }
 
+            public void skew_2_Rotate()
+            {
+                rotate += 90;
+
+                if (rotate >= 360)
+                    rotate = 0;
+
+                int flagY = childBlocks[0].Item1;
+                int flagX = childBlocks[0].Item2;
+                bool isPossible = true;
+                int[] dy = { 0, 0, 0, 0 };
+                int[] dx = { 0, 0, 0, 0 };
+                switch (rotate)
+                {
+                    case 0:
+                    case 180:
+                        {
+                            dy = new int[] { 0, 1, 0, 1 };
+                            dx = new int[] { 1, 1, 2, 0 };
+                            break;
+                        }
+                    case 90:
+                    case 270:
+                        {
+                            dy = new int[] { 0, 1, 1, 2 };
+                            dx = new int[] { -1, -1, 0, 0 };
+                            break;
+                        }
+                }
+                for (int i = 0; i < childBlocks.Count; i++)
+                {
+                    int nowY = flagY + dy[i];
+                    int nowX = flagX + dx[i];
+                    if (games.InitGames._GameBoard[nowY, nowX] == e_BoardState.blocks && !IsChildBlock(nowY, nowX))
+                    {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible)
+                {
+                    for (int i = 0; i < childBlocks.Count; i++)
+                    {
+                        int nowY = childBlocks[i].Item1;
+                        int nowX = childBlocks[i].Item2;
+                        int newY = flagY + dy[i];
+                        int newX = flagX + dx[i];
+                        childBlocks[i] = Tuple.Create(newY, newX);
+                        games.InitGames._GameBoard[nowY, nowX] = e_BoardState.blank;
+                        games.InitGames._GameBoard[newY, newX] = e_BoardState.blocks;
+                    }
+                }
+            }
+            public void L_1_Rotate()
+            {
+                rotate += 90;
+
+                if (rotate >= 360)
+                    rotate = 0;
+
+                int flagY = childBlocks[0].Item1;
+                int flagX = childBlocks[0].Item2;
+                bool isPossible = true;
+                int[] dy = { 0, 0, 0, 0 };
+                int[] dx = { 0, 0, 0, 0 };
+                switch (rotate)
+                {
+                    case 0:
+                        {
+                            dy = new int[] { 0, 1, 2, 2 };
+                            dx = new int[] { 0, 0, 0, 1 };
+                            break;
+                        }
+                    case 180:
+                        {
+                            dy = new int[] { 0, 0, 1, 2 };
+                            dx = new int[] { 0, -1, 0, 0 };
+                            break;
+                        }
+                    case 90:
+                        {
+                            dy = new int[] { 0, 0, 0, 1 };
+                            dx = new int[] { 0, 1, 2, 0 };
+                            break;
+                        }
+                    case 270:
+                        {
+                            dy = new int[] { 0, 0, 0, -1 };
+                            dx = new int[] { 0, -1, 1, 1 };
+                            break;
+                        }
+                }
+                for (int i = 0; i < childBlocks.Count; i++)
+                {
+                    int nowY = flagY + dy[i];
+                    int nowX = flagX + dx[i];
+                    if (games.InitGames._GameBoard[nowY, nowX] == e_BoardState.blocks && !IsChildBlock(nowY, nowX))
+                    {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible)
+                {
+                    for (int i = 0; i < childBlocks.Count; i++)
+                    {
+                        int nowY = childBlocks[i].Item1;
+                        int nowX = childBlocks[i].Item2;
+                        int newY = flagY + dy[i];
+                        int newX = flagX + dx[i];
+                        childBlocks[i] = Tuple.Create(newY, newX);
+                        games.InitGames._GameBoard[nowY, nowX] = e_BoardState.blank;
+                        games.InitGames._GameBoard[newY, newX] = e_BoardState.blocks;
+                    }
+                }
+            }
+            public void L_2_Rotate()
+            {
+                rotate += 90;
+
+                if (rotate >= 360)
+                    rotate = 0;
+
+                int flagY = childBlocks[0].Item1;
+                int flagX = childBlocks[0].Item2;
+                bool isPossible = true;
+                int[] dy = { 0, 0, 0, 0 };
+                int[] dx = { 0, 0, 0, 0 };
+                switch (rotate)
+                {
+                    case 0:
+                        {
+                            dy = new int[] { 0, 1, 2, 2 };
+                            dx = new int[] { 0, 0, 0, -1 };
+                            break;
+                        }
+                    case 180:
+                        {
+                            dy = new int[] { 0, 0, 1, 2 };
+                            dx = new int[] { 0, 1, 0, 0 };
+                            break;
+                        }
+                    case 90:
+                        {
+                            dy = new int[] { 0, 1, 1, 1 };
+                            dx = new int[] { 0, 0, 1, 2 };
+                            break;
+                        }
+                    case 270:
+                        {
+                            dy = new int[] { 0, 0, 0, 1 };
+                            dx = new int[] { 0, 1, 2, 2 };
+                            break;
+                        }
+                }
+                for (int i = 0; i < childBlocks.Count; i++)
+                {
+                    int nowY = flagY + dy[i];
+                    int nowX = flagX + dx[i];
+                    if (games.InitGames._GameBoard[nowY, nowX] == e_BoardState.blocks && !IsChildBlock(nowY, nowX))
+                    {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible)
+                {
+                    for (int i = 0; i < childBlocks.Count; i++)
+                    {
+                        int nowY = childBlocks[i].Item1;
+                        int nowX = childBlocks[i].Item2;
+                        int newY = flagY + dy[i];
+                        int newX = flagX + dx[i];
+                        childBlocks[i] = Tuple.Create(newY, newX);
+                        games.InitGames._GameBoard[nowY, nowX] = e_BoardState.blank;
+                        games.InitGames._GameBoard[newY, newX] = e_BoardState.blocks;
+                    }
                 }
             }
             public void T_Rotate()
             {
+                rotate += 90;
+
+                if (rotate >= 360)
+                    rotate = 0;
+
+                int flagY = childBlocks[0].Item1;
+                int flagX = childBlocks[0].Item2;
+                bool isPossible = true;
+                int[] dy = { 0, 0, 0, 0 };
+                int[] dx = { 0, 0, 0, 0 };
+                switch (rotate)
+                {
+                    case 0:
+                        {
+                            dy = new int[] { 0, 1, 0, 0 };
+                            dx = new int[] { 0, 0, -1, 1 };
+                            break;
+                        }
+                    case 180:
+                        {
+                            dy = new int[] { 0, 0, 0, -1 };
+                            dx = new int[] { 0, 1, -1, 0 };
+                            break;
+                        }
+                    case 90:
+                        {
+                            dy = new int[] { 0, 1, -1, 0 };
+                            dx = new int[] { 0, 0, 0, -1 };
+                            break;
+                        }
+                    case 270:
+                        {
+                            dy = new int[] { 0, 0, 1, -1 };
+                            dx = new int[] { 0, 1, 0, 0 };
+                            break;
+                        }
+                }
                 for (int i = 0; i < childBlocks.Count; i++)
                 {
-
+                    int nowY = flagY + dy[i];
+                    int nowX = flagX + dx[i];
+                    if (games.InitGames._GameBoard[nowY, nowX] == e_BoardState.blocks && !IsChildBlock(nowY, nowX))
+                    {
+                        isPossible = false;
+                    }
+                }
+                if (isPossible)
+                {
+                    for (int i = 0; i < childBlocks.Count; i++)
+                    {
+                        int nowY = childBlocks[i].Item1;
+                        int nowX = childBlocks[i].Item2;
+                        int newY = flagY + dy[i];
+                        int newX = flagX + dx[i];
+                        childBlocks[i] = Tuple.Create(newY, newX);
+                        games.InitGames._GameBoard[nowY, nowX] = e_BoardState.blank;
+                        games.InitGames._GameBoard[newY, newX] = e_BoardState.blocks;
+                    }
                 }
             }
             public e_BlockType Type
